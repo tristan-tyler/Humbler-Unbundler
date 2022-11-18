@@ -23,7 +23,7 @@ redeem_cooldown_minutes = 10
 # end User defined variables end
 
 # try not to repeat redeem keys
-if path.exists("./used_keys") :
+if path.exists("./.used_keys") :
   used_keys = loads(open("./.used_keys", "r", encoding="utf8").read())
 else :
   open("./.used_keys", "w", encoding="utf8")
