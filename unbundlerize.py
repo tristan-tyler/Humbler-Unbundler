@@ -91,9 +91,9 @@ while try_redeem :
   # response 1 (or true) is success / 2 for some kind of failure 
   # In most cases we want to pop off the top of the list below
   if response["success"] == True or response["success"] == "true":
-    used_keys[f"{item['redeemed_key_val']}"] = "sucessfully redeemed"
+    used_keys[f"{item['redeemed_key_val']}"] = "successfully redeemed"
     try_redeem.pop(0)
-    print(f"Sucessfully redeemed {item['human_name']}")
+    print(f"Successfully redeemed {item['human_name']}")
     sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
   elif response.get("purchase_result_details") == 15:
     used_keys[f"{item['redeemed_key_val']}"] = "owned by a different account"

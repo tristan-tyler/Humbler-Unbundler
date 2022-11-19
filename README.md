@@ -2,13 +2,13 @@
 
 This tool doesn't really leverage anything too weird and is very simple in execution (it's all front end api calls that the websites make)
 
-To my knowledge there are no inherent dangers of using this tool, I presonally redeemed over 500 games (which took 12 or so hours)
+To my knowledge there are no inherent dangers of using this tool, I personally redeemed over 500 games (which took 12 or so hours)
 
 HOWEVER,
 
 ```
 Please use this tool at your own risk
-I make no garuntees involving the of the safety of using this tool.
+I make no guarantees involving the of the safety of using this tool.
 ```
 
 ## Prerequisites
@@ -52,7 +52,7 @@ This is a tool for automatically redeeming humble bundle steam keys to steam. Wi
 1. Browser will close when complete
 1. File .used_keys will be generated for future runs of the tool (skips redemption call so we don't waste time on stuff we know is already used)
 
-## Configuraation
+## Configuration
 
 At the top of the file there are two variables
 
