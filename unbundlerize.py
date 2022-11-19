@@ -108,13 +108,15 @@ while try_redeem :
     print(f"Sucessfully redeemed {item['human_name']}")
     sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
   # purchase_result_details 9 or 15 seem to be things that are not redeemable
-  elif response["purchase_result_details"] == 9 or response["purchase_result_details"] == 15:
+  elif response.get("purchase_result_details") == 9 or response.get("purchase_result_details") == 15:
     used_keys[f"{item['redeemed_key_val']}"] = "previously used"
     try_redeem.pop(0)
     sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
   # purchase_result_details 53 indicates too many requests
-  elif response["purchase_result_details"] == 53:
+  elif response.get("purchase_result_details") == 53:
     print(f"Steam is disallowing redeem due to too many requests, waiting for a while ({redeem_cooldown_minutes} min) and will continue...")
+    # occasionally write to file
+    open("./.used_keys", "w", encoding="utf8").write(dumps(used_keys))
     sleep(redeem_cooldown_minutes*60) # steam got angry, sleep for a number of minutes
   else :
     try_redeem.pop(0)
