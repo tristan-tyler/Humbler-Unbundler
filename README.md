@@ -1,3 +1,16 @@
+## Preface
+
+This tool doesn't really leverage anything too weird and is very simple in execution (it's all front end api calls that the websites make)
+
+To my knowledge there are no inherent dangers of using this tool, I presonally redeemed over 500 games (which took 12 or so hours)
+
+HOWEVER,
+
+```
+Please use this tool at your own risk
+I make no garuntees involving the of the safety of using this tool.
+```
+
 ## Prerequisites
 
 - Firefox (or change script, explained below)
