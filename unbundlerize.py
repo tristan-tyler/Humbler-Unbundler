@@ -5,20 +5,9 @@ from os import path
 from time import sleep
 
 # User defined variables
-
-# Because I ran this on my own stuff I have not been able to test multiple settings
-# I used 30 seconds between redeems and a 30 minute cooldown (not recommended)
-# a 30 minute cooldown is not long enough of a wait so I ended up with an hour
-# gap between redemption sessions over the course of 700 game keys (very long)
-
-# It is possible that a 30 second gap between redemptions hurts more than it helps
-# I was able to redeem around 41 games at a time per hour which took 20 minutes minimum
-# If performed faster you might hit the rate limit and initiate the longer coolown sooner
-# but I'm really not sure as of now
-
-# Please report back how/what worked for you if you have the time!
-
-redeem_retry_rate_seconds = 30
+# Please report back what worked for you (how many games in a row/how long it took) if you have the time!
+# Make an issue! https://github.com/gr8engineer2b/Humbler-Unbundler/issues
+redeem_retry_rate_seconds = 60
 redeem_cooldown_minutes = 10
 # end User defined variables end
 
@@ -100,22 +89,28 @@ while try_redeem :
   response = loads(driver.execute_script(js))
 
   # response 1 (or true) is success / 2 for some kind of failure 
-  # I don't care enough to be ultra specific
   # In most cases we want to pop off the top of the list below
   if response["success"] == True or response["success"] == "true":
     used_keys[f"{item['redeemed_key_val']}"] = "sucessfully redeemed"
     try_redeem.pop(0)
     print(f"Sucessfully redeemed {item['human_name']}")
     sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
-  # purchase_result_details 9 or 15 seem to be things that are not redeemable
-  elif response.get("purchase_result_details") == 9 or response.get("purchase_result_details") == 15:
-    used_keys[f"{item['redeemed_key_val']}"] = "previously used"
+  elif response.get("purchase_result_details") == 15:
+    used_keys[f"{item['redeemed_key_val']}"] = "owned by a different account"
     try_redeem.pop(0)
     sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
-  # purchase_result_details 53 indicates too many requests
+  elif response.get("purchase_result_details") == 9:
+    used_keys[f"{item['redeemed_key_val']}"] = "already redeemed to this account"
+    try_redeem.pop(0)
+    sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
+  elif response.get("purchase_result_details") == 24:
+    print(f"You need another product before it is possible to redeem : {item['human_name']}")
+    used_keys[f"{item['redeemed_key_val']}"] = f"other software required for: {item['human_name']}"
+    try_redeem.pop(0)
+    sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
   elif response.get("purchase_result_details") == 53:
     print(f"Steam is disallowing redeem due to too many requests, waiting for a while ({redeem_cooldown_minutes} min) and will continue...")
-    # occasionally write to file
+    # occasionally write to file so as not to lose progress
     open("./.used_keys", "w", encoding="utf8").write(dumps(used_keys))
     sleep(redeem_cooldown_minutes*60) # steam got angry, sleep for a number of minutes
   else :
@@ -124,5 +119,6 @@ while try_redeem :
     sleep(redeem_retry_rate_seconds) # sleep for a number of seconds
 
 # cleanup
-driver.close()
 open("./.used_keys", "w", encoding="utf8").write(dumps(used_keys))
+driver.close()
+print("FINISHED!")
