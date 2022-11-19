@@ -48,7 +48,7 @@ This is a tool for automatically redeeming humble bundle steam keys to steam. Wi
    - Log In
    - Press enter in `terminal`
 1. Console will output messages about redemption, the process may take quite a while (it did for me)
-   - Open the browser console and go to the newtwork tab if you want to see the requests
+   - Open the browser console and go to the network tab (usually F12) if you want to see the requests being made
 1. Browser will close when complete
 1. File .used_keys will be generated for future runs of the tool (skips redemption call so we don't waste time on stuff we know is already used)
 
@@ -56,18 +56,11 @@ This is a tool for automatically redeeming humble bundle steam keys to steam. Wi
 
 At the top of the file there are two variables
 
-defaults are `redeem_retry_rate_seconds = 30 | redeem_cooldown_minutes = 10`
+defaults are `redeem_retry_rate_seconds = 60 | redeem_cooldown_minutes = 10`
 
 ```
-Because I ran this on my own stuff I have not been able to test multiple settings
-I used 30 seconds between redeems and a 30 minute cooldown (not recommended)
-a 30 minute cooldown is not long enough of a wait so I ended up with an hour
-gap between redemption sessions over the course of 700 game keys (very long)
+With settings 30 sec, 30 min it took me quite a while because it wouldn't have stopped being angry after 30 minutes and then it would take an hour
+with settings 30 sec, 10 min I had way more success and it would take 20 - 50 minutes between request sessions, idk why tbh
 
-It is possible that a 30 second gap between redemptions hurts more than it helps
-I was able to redeem around 41 games at a time per hour which took 20 minutes minimum
-If performed faster you might hit the rate limit and initiate the longer coolown sooner
-but I'm really not sure as of now
-
-Please report back how/what worked for you if you have the time!
+Please report back how/what other stuff worked for you if you have the time!
 ```
