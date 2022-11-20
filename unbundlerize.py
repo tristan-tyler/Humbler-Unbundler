@@ -40,7 +40,7 @@ for gamekey in json :
       else :
         needs_reveal.append(item)
 
-# humble bundle has a wierd system where you have to "reveal" keys and in order 
+# humble bundle has a weird system where you have to "reveal" keys and in order 
 # to get the keys from the api calls they need to be revealed
 for item in needs_reveal :
   # This is a round about way to do a post request in selenium

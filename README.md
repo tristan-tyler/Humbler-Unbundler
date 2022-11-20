@@ -32,7 +32,7 @@ It should work on whatever you want, let me know if it does!
 
 This is a tool for automatically redeeming humble bundle steam keys to steam. With the script as-is you can expect about 41 games per hour redeemed automatically
 
-`python unbundlerize.py`
+`python unbundlerize.py ` or `py unbundlerize.py`
 
 ## Flow
 
