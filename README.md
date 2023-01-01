@@ -13,20 +13,22 @@ I make no guarantees involving the of the safety of using this tool.
 
 ## Prerequisites
 
-- Firefox (or change script, explained below)
+- Firefox (You must change the script and potentially install additional drivers to use Chrome, explained below)
 - Python 3
 - pip (usually comes with python)
 - selenium (`pip install selenium`)
 
 ## Usage
 
-This script is currently set up to use Firefox change line 32 if you would like to try using a different browser
+This script is by default set up to use Firefox change the first line if you would like to try using a different browser
+I have tested the script with Firefox and Chrome
 
-`driver = webdriver.Firefox() --> driver = webdriver.Chrome()`
+`from selenium.webdriver import Firefox as Browser --> from selenium.webdriver import Chrome as Browser`
 
 https://www.selenium.dev/documentation/webdriver/browsers/
+https://chromedriver.chromium.org/getting-started
 
-It should work on whatever you want, let me know if it does!
+It should work on whatever you need, let me know if it does!
 
 ### Purpose
 
@@ -52,11 +54,12 @@ This is a tool for automatically redeeming humble bundle steam keys to steam. Wi
 1. Browser will close when complete
 1. File .used_keys will be generated for future runs of the tool (skips redemption call so we don't waste time on stuff we know is already used)
 
-## Configuration
+## Settings
 
-At the top of the file there are two variables
+defaults are `redeem_retry_rate_seconds = 60 | redeem_cooldown_minutes = 10 | loglevel = INFO`
+unbundlerize.py -r <retry_rate_seconds> -c <redeem_cooldown_minutes> --log=(DEBUG|INFO|WARNING|etc...)
 
-defaults are `redeem_retry_rate_seconds = 60 | redeem_cooldown_minutes = 10`
+**DO NOT POST DEBUG LEVEL LOGS TO THE INTERNET, THEY MAY CONTAIN UNUSED KEYS**
 
 ```
 With settings 30 sec, 30 min it took me quite a while because it wouldn't have stopped being angry after 30 minutes and then it would take an hour
